@@ -5,7 +5,7 @@
  * Form left and right inorder and preorder sub trees and iterate recursively util arrays are exhausted
  */
 // Time Complexity: O (N) N: number of nodes in tree; Asymptotically
-// Space Complexity: O (N) N: number of nodes in tree; Asymptotically
+// Space Complexity: O (N) Space asymptotically and O(H) stack space for recursion where H is tree height
 // Did this code successfully run on Leetcode : Yes
 import java.util.Arrays;
 
