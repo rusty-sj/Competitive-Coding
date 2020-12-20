@@ -1,6 +1,7 @@
 class Solution {
     public int removeDuplicates(int[] nums) {
-        // 0,0,1,1,1,2,2,3,3,4
+        // Time Complexity: O(n)
+        // Space Complexity: O(1)
         if (nums == null || nums.length == 0)
             return 0;
         int readHead = 1, writeHead = 1;
