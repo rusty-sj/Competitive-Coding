@@ -1,32 +1,37 @@
 class Solution {
+    
+    public int[][] dirs = new int[][]{{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
     public int numIslands(char[][] grid) {
         if (grid == null || grid.length == 0)
             return 0;
-        int count = 0;
+        
+        int nIslands = 0;
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[i].length; j++) {
                 if (grid[i][j] == '1') {
                     dfs(grid, i, j);
-                    count += 1;
+                    nIslands++;
                 }
             }
         }
-        return count;
+        return nIslands;
     }
     
     public void dfs(char[][] grid, int i, int j) {
-        if (grid[i][j] != '1')
-            return;
+        
+        // Mark visited
         grid[i][j] = '#';
-        int[][] dirs = new int[][]{{0, 1}, {-1, 0}, {1, 0}, {0, -1}};
+        
+        // Recursive step
         for (int[] dir: dirs) {
-            int r = i + dir[0];
-            int c = j + dir[1];
-            if (r >= 0 && r < grid.length
-               && c >=0 && c < grid[i].length
-               && grid[r][c] == '1')
-                dfs(grid, r, c);
-        }
+            int row = dir[0] + i;
+            int column = dir[1] + j;
             
+            if (row >= 0 && row < grid.length
+               && column >= 0 && column < grid[i].length 
+               && grid[row][column] == '1')
+                dfs(grid, row, column);
+            
+        }
     }
 }
