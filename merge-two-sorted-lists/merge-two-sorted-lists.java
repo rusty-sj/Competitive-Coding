@@ -9,10 +9,18 @@
  * }
  */
 class Solution {
+    
+    // TC: O(N + M)
+    // SC: O(1)
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-        ListNode dummy = new ListNode(-1);
-        ListNode current = dummy;
+        // Maintain head pointer with temp
+        ListNode temp = new ListNode(-1);
+        
+        // Iterator pointer
+        ListNode current = temp;
+        
         while (l1 != null && l2 != null) {
+            // l1 value is less, use it for sorted link
             if (l1.val <= l2.val) {
                 current.next = l1;
                 l1 = l1.next;
@@ -22,8 +30,11 @@ class Solution {
             }
             current = current.next;
         }
+        
+        // If one of the two pointers are not null, copy that list
         if (l1 != null) current.next = l1;
         else if (l2 != null) current.next = l2;
-        return dummy.next;
+        
+        return temp.next;
     }
 }
