@@ -1,10 +1,19 @@
 class Solution {
     public int maxSubArray(int[] nums) {
-        int maxSum = nums[0], currSum = nums[0];
-        int prev = Integer.MIN_VALUE;
+        
+        // Empty input
+        if (nums == null || nums.length == 0)
+            return 0;
+        
+        // Initialize maxSum and running sum to first element
+        int maxSum = nums[0], currentSum = nums[0];
+        
         for (int i = 1; i < nums.length; i++) {
-            currSum = Math.max(nums[i], nums[i] + currSum);
-            maxSum = Math.max(currSum, maxSum);
+            // Include current element or discard all prev and take just current
+            currentSum = Math.max(nums[i], currentSum + nums[i]);
+            
+            // Update maxSum
+            maxSum = Math.max(maxSum, currentSum);
         }
         return maxSum;
     }
