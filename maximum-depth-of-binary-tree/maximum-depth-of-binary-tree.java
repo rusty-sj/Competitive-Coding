@@ -14,19 +14,20 @@
  * }
  */
 class Solution {
-    public int maxDepth = 0;
+    int maxDep = 0;
     public int maxDepth(TreeNode root) {
-        helper(root, 1);
-        return maxDepth;
+        if (root == null) {
+            return maxDep;
+        }
+        dfs(root, 1);
+        return maxDep;
     }
     
-    public void helper(TreeNode node, int depth) {
+    void dfs(TreeNode node, int depth) {
         if (node == null)
             return;
-        if (depth > maxDepth)
-            maxDepth = depth;
-        helper(node.left, depth + 1);
-        helper(node.right, depth + 1);
+        maxDep = Math.max(depth, maxDep);
+        dfs(node.left, depth + 1);
+        dfs(node.right, depth + 1);
     }
-    
 }
