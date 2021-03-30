@@ -15,14 +15,16 @@
  */
 class Solution {
     public boolean isValidBST(TreeNode root) {
-        return helper(root, -1, -1);
+        return recursion(root, null, null);
     }
     
-    public boolean helper(TreeNode node, int low, int high) {
+    public boolean recursion(TreeNode node, Integer low, Integer high) {
         if (node == null)
             return true;
-        if ((low != -1 && node.val <= low) || (high != -1 && node.val >= high))
+        
+        if ((low != null && node.val <= low) || (high != null && node.val >= high))
             return false;
-        return helper(node.left, low, node.val) && helper (node.right, node.val, high);
+        
+        return recursion(node.left, low, node.val) && recursion(node.right, node.val, high);
     }
 }
