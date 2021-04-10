@@ -1,19 +1,21 @@
 class Solution {
-    public int[][] dirs = new int[][]{{0, -1}, {0, 1}, {-1, 0}, {1, 0}};
-    Map<Character, Integer> map = new HashMap<>(){ 
-        {put('L', 0);
-        put('R', 1);
-        put('U', 2);
-        put('D', 3);}};
+    
     public boolean judgeCircle(String moves) {
         if (moves == null || moves.length() == 0)
             return true;
-        int coordinateX = 0, coordinateY = 0;
-        for (char c: moves.toCharArray()) {
-            int move = map.get(c);
-            coordinateX += dirs[move][0];
-            coordinateY += dirs[move][1];
+        
+        int ucount = 0, dcount = 0, lcount = 0, rcount = 0;
+        for (int i = 0; i < moves.length(); i++) {
+            char c = moves.charAt(i);
+            if (c == 'L')
+                lcount++;
+            else if (c == 'R')
+                rcount++;
+            else if (c == 'U')
+                ucount++;
+            else
+                dcount++;
         }
-        return coordinateX == 0 && coordinateY ==0;
+        return rcount == lcount && ucount == dcount;
     }
 }
