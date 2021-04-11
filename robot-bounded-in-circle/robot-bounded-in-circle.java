@@ -1,4 +1,7 @@
 class Solution {
+    
+    // TC: O(N)
+    // SC: O(1)
     public boolean isRobotBounded(String instructions) {
         
         // Directions in sequence N, E, S, W
@@ -14,7 +17,7 @@ class Solution {
                 coordinateX += dirs[direction][0];
                 coordinateY += dirs[direction][1];
             } else if (c == 'L') {
-                direction = (direction + 3) % 4;
+                direction = (direction + dirs.length - 1) % 4;
             } else if (c == 'R') {
                 direction = (direction + 1) % 4;
             }
