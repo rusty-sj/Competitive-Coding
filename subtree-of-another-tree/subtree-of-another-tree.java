@@ -15,17 +15,33 @@
  */
 class Solution {
     public boolean isSubtree(TreeNode s, TreeNode t) {
-        if (s == null) return false;
-        if (isSame(s, t)) return true;
+        
+        // Base case, never found a start point for t in s
+        if (s == null) 
+            return false;
+        
+        // Done finding entire t
+        if (t == null)
+            return true;
+        
+        // check if node values and entire subtrees from them are equal
+        if (areIdentical(s, t))
+            return true;
+        
+        // try to find start point for t in s
         return isSubtree(s.left, t) || isSubtree(s.right, t);
     }
     
-    private boolean isSame(TreeNode s, TreeNode t) {
-        if (s == null && t == null) return true;
-        if (s == null || t == null) return false;
+    public boolean areIdentical(TreeNode s, TreeNode t) {
+        if (s == null && t == null)
+            return true;
+        if (s == null || t == null)
+            return false;
         
-        if (s.val != t.val) return false;
-        
-        return isSame(s.left, t.left) && isSame(s.right, t.right);
+        return s.val == t.val 
+            && areIdentical(s.left, t.left) 
+            && areIdentical(s.right, t.right);
     }
+    
+    
 }
