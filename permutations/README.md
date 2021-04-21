@@ -1,3 +1,4 @@
+[Discussion Post (created on 21/3/2021 at 0:39)](https://leetcode.com/problems/permutations/discuss/1169332/Java-recursive)  
 <h2>46. Permutations</h2><h3>Medium</h3><hr><div><p>Given an array <code>nums</code> of distinct integers, return <em>all the possible permutations</em>. You can return the answer in <strong>any order</strong>.</p>
 
 <p>&nbsp;</p>
