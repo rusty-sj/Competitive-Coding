@@ -1,20 +1,23 @@
 class Solution {
+    
     public int maxProfit(int[] prices) {
-        
-        int minCost = Integer.MAX_VALUE;
-        int maxProfit = 0;
-        
-        // Try to buy on minimum cost and sell whenever price is more than minCost
-        for (int i = 0; i < prices.length; i++) {
-            // If price is less than minimum cost, update minimum cost
-            if (prices[i] < minCost)
-                minCost = prices[i];
-            else {
-            // If price is more than min, try to sell and update profit
-                int profit = prices[i] - minCost;
-                maxProfit = Math.max(maxProfit, profit);
-            }
+        // Empty input
+        if (prices == null || prices.length == 0) {
+            return 0;
         }
-        return maxProfit;
+        
+        int minPrice = prices[0], profit = -prices[0];
+        
+        int i = 1;
+        while (i < prices.length) { 
+            if (prices[i] < minPrice)   // buy if found a lesser price
+                minPrice = prices[i];
+            else {
+                profit = Math.max(profit, prices[i] - minPrice);    // Try selling and see if we found better profit
+            }
+            i++;
+        }
+        
+        return profit < 0 ? 0 : profit;
     }
 }
