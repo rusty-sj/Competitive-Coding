@@ -13,10 +13,8 @@ class Solution {
             for (int j = 0; j < m; j++) {
                 // Call backtrack if start of word is found
                 if (board[i][j] == word.charAt(0)) {
-                    visited[i][j] = true;
                     if (backtrack(board, i, j, word, 1))
                         return true;
-                    visited[i][j] = false;
                 }
             }
         }
