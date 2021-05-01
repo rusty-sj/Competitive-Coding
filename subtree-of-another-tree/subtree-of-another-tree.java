@@ -14,34 +14,24 @@
  * }
  */
 class Solution {
-    public boolean isSubtree(TreeNode s, TreeNode t) {
-        
-        // Base case, never found a start point for t in s
-        if (s == null) 
+    public boolean isSubtree(TreeNode root, TreeNode subRoot) { 
+        if (root == null)
             return false;
-        
-        // Done finding entire t
-        if (t == null)
+    
+        if (subRoot == null)
             return true;
         
-        // check if node values and entire subtrees from them are equal
-        if (areIdentical(s, t))
+        if (inorder(root, subRoot))
             return true;
-        
-        // try to find start point for t in s
-        return isSubtree(s.left, t) || isSubtree(s.right, t);
+        return isSubtree(root.left, subRoot) || isSubtree(root.right, subRoot);
     }
     
-    public boolean areIdentical(TreeNode s, TreeNode t) {
-        if (s == null && t == null)
+    public boolean inorder(TreeNode root, TreeNode subRoot) {
+        if (root == null && subRoot == null)
             return true;
-        if (s == null || t == null)
+        if (root == null || subRoot == null)
             return false;
-        
-        return s.val == t.val 
-            && areIdentical(s.left, t.left) 
-            && areIdentical(s.right, t.right);
+        return root.val == subRoot.val && inorder(root.left, subRoot.left) && inorder(root.right, subRoot.right);
     }
-    
     
 }
