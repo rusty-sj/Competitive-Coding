@@ -1,26 +1,30 @@
 class MedianFinder {
-    
-    PriorityQueue<Integer> maxHeap;
-    PriorityQueue<Integer> minHeap;
 
+    PriorityQueue<Integer> leftHeap, rightHeap;
     /** initialize your data structure here. */
     public MedianFinder() {
-        this.maxHeap = new PriorityQueue<>((a, b) -> b.compareTo(a));
-        this.minHeap = new PriorityQueue<>((a, b) -> a.compareTo(b));
+        this.leftHeap = new PriorityQueue<>(Collections.reverseOrder());
+        this.rightHeap = new PriorityQueue<>();
     }
     
     public void addNum(int num) {
-        this.maxHeap.offer(num);
-        this.minHeap.offer(maxHeap.poll());
-        if (this.maxHeap.size() < this.minHeap.size())
-		    this.maxHeap.offer(this.minHeap.poll());
+        if (this.leftHeap.isEmpty() || this.leftHeap.peek() > num) {
+            this.leftHeap.add(num);
+        } else {
+            this.rightHeap.add(num);
+        }
+        if (this.leftHeap.size() < this.rightHeap.size()) {
+            this.leftHeap.add(this.rightHeap.poll());
+        } else if (this.rightHeap.size() < this.leftHeap.size() - 1) {
+            this.rightHeap.add(this.leftHeap.poll());
+        }
     }
     
     public double findMedian() {
-        if (this.maxHeap.size() == this.minHeap.size())
-		    return (this.maxHeap.peek() + this.minHeap.peek()) / 2.0;
-	    else
-		    return this.maxHeap.peek();
+        if ((this.leftHeap.size() + this.rightHeap.size()) % 2 == 0) {
+            return (double) (this.leftHeap.peek() + this.rightHeap.peek()) / 2;
+        } else
+            return (double) this.leftHeap.peek();
     }
 }
 
@@ -30,3 +34,5 @@ class MedianFinder {
  * obj.addNum(num);
  * double param_2 = obj.findMedian();
  */
+
+    
