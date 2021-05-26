@@ -14,27 +14,31 @@
  * }
  */
 class Solution {
-    
-    int count = 0;
-    
+    int count;
     public int countUnivalSubtrees(TreeNode root) {
-        if (root == null)
-            return count;
-        
-        if (dfs(root, root.val))
-            count++;
-        
-        countUnivalSubtrees(root.left);
-        countUnivalSubtrees(root.right);
-        
+        count = 0;
+        recursion(root);
         return count;
     }
     
-    public boolean dfs(TreeNode node, int val) {
+    boolean recursion(TreeNode node) {
         if (node == null)
             return true;
-        if (node.val != val)
+        
+        boolean left = recursion(node.left);
+        boolean right = recursion(node.right);
+        
+        if (left == false || right == false)
             return false;
-        return dfs(node.left, val) && dfs(node.right, val);
+        
+        if (node.left != null && node.val != node.left.val)
+            return false;
+        
+        if (node.right != null && node.val != node.right.val)
+            return false;
+        
+        count++;
+        return true;
     }
+    
 }
