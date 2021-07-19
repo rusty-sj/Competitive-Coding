@@ -15,12 +15,23 @@
  */
 class Solution {
     public int countNodes(TreeNode root) {
-        return preorder(root, 0);
+        if (root == null)
+            return 0;
+        int leftH = countLeftHeight(root);
+        int rightH = countRightHeight(root);
+        
+        if (leftH == rightH) {
+            return (1 << leftH) - 1;
+        } else {
+            return countNodes(root.left) + countNodes(root.right) + 1;
+        }
     }
     
-    public int preorder(TreeNode node, int count) {
-        if (node == null) 
-            return 0;
-        return 1 + preorder(node.left, count) + preorder(node.right, count);
+    public int countLeftHeight(TreeNode node) {
+        return node == null ? 0 : 1 + countLeftHeight(node.left);
+    }
+    
+    public int countRightHeight(TreeNode node) {
+        return node == null ? 0 : 1 + countRightHeight(node.right);
     }
 }
